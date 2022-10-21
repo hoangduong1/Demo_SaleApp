@@ -1,0 +1,22 @@
+*{
+    font-family: Tahoma;
+
+}
+body{
+    background-color: lightblue;
+    color: dark-blue;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.proImg{
+    max-width: 100%;
+}
+
+.container{
+    padding: 15px;
+    margin: auto;
+}
+
