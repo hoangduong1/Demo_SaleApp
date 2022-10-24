@@ -21,28 +21,17 @@
         </button>
         <div class="collapse navbar-collapse" id="mynavbar">
             <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('product_list') }}">Sản phẩm</a>
+                </li>
                 {% for c in categories%}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">{{c.name}}</a>
+                    <a class="nav-link" href="/products?category_id={{c.id}}">{{c.name}}</a>
                     {% endfor %}
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-<div class="row container">
-    {% for d in products%}
-    <div class="col-sm">
-        <ul>
-            <li><img src="{{ d.image}}" alt="{{d.name}}" class="proImg"></li>
-            <li>Tên sản phẩm: {{d.name}}</li>
-            <li>Mô tả: {{d.description}}</li>
-            <li>Giá tiền: {{d.price}} VND </li>
-        </ul>
-    </div>
-    {% endfor %}
-</div>
-
-
 </body>
 </html>
