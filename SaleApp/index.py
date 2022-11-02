@@ -1,22 +1,22 @@
 from flask import render_template, request
-from SaleApp import app
-import dao
+
+from SaleApp import app, dao
 
 
 @app.route("/")
-def home():
-    cates = dao.load_categories()
-    return render_template('index.html', categories=cates)
+def index():
+    categories = dao.load_categories()
+    products = dao.load_products(category_id=request.args.get("category_id"),
+                                 kw=request.args.get('keyword'))
+    return render_template('index.html',
+                           categories=categories,
+                           products=products)
 
 
-@app.route("/products")
-def product_list(cate_id=None):
-    cates = dao.load_categories()
-
-    cate_id = request.args.get("category_id")
-    prod = dao.load_product(cate_id=cate_id)
-    return render_template('products.html', categories=cates, products=prod)
-
+@app.route('/products/<int:product_id>')
+def details(product_id):
+    p = dao.get_product_by_id(product_id)
+    return render_template('details.html', product=p)
 
 if __name__ == '__main__':
     app.run(debug=True)

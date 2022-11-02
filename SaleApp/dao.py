@@ -1,18 +1,21 @@
-import json, os
-from SaleApp import app
-
-
-def read_json(path):
-    with open(path, "r", encoding="utf8") as f:
-        return json.load(f)
+from SaleApp.models import Category, Product
 
 
 def load_categories():
-    return read_json(os.path.join(app.root_path, 'data/categories.json'))
+    return Category.query.all()
 
 
-def load_product(cate_id=None):
-    products = read_json(os.path.join(app.root_path, 'data/products.json'))
-    if cate_id:
-        products = [p for p in products if p['category_id'] == int(cate_id)]
-    return products
+def load_products(category_id=None, kw=None):
+    query = Product.query.filter(Product.active.__eq__(True))
+
+    if category_id:
+        query = query.filter(Product.category_id.__eq__(category_id))
+
+    if kw:
+        query = query.filter(Product.name.contains(kw))
+
+    return query.all()
+
+
+def get_product_by_id(product_id):
+    return Product.query.get(product_id)
