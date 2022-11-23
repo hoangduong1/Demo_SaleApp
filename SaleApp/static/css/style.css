@@ -1,19 +1,7 @@
-*{
+* {
     font-family: Tahoma;
-
 }
-body{
+
+body {
     background-color: lightblue;
-    color: dark-blue;
 }
-
-ul{
-    list-style-type: none;
-}
-
-.container{
-    padding: 30px 15px;
-    margin: 0 auto;
-}
-
-
